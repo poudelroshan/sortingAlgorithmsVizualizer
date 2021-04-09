@@ -7,7 +7,7 @@ import { useState } from "react";
 // Adds n random numbers to the array
 const initializeArray = () => {
 	let array = [];
-	for (let i = 0; i < 20; i++) {
+	for (let i = 0; i < 30; i++) {
 		array.push(Math.floor(Math.random() * 100));
 	}
 	return array;

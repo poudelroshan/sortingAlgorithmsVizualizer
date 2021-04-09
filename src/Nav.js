@@ -2,14 +2,13 @@ import React from "react";
 
 const Nav = (props) => {
 	const sortArrayHandler = () => {
-		let array = [...props.arrayState];
-		array.sort();
-		props.setArrayState(array);
-		console.log("Array" + array);
 		console.log(props.arrayState);
+		let array = [...props.arrayState];
+		array.sort((a, b) => a - b);
+		props.setArrayState(array);
 	};
 	return (
-		<div>
+		<div id="nav-bar">
 			<h1>Sorting Algorithm Visualizer</h1>
 			<button id="sort-btn" onClick={sortArrayHandler}>
 				Sort!
