@@ -1,0 +1,30 @@
+/* CSS Variables */
+:root {
+	--systemGray: rgb(28, 28, 30);
+	--lightSystemBlue: rgb(0, 122, 255);
+	--darkSystemBlue: rgb(10, 132, 255);
+	--lightSystemGreen: rgb(52, 199, 89);
+	--darkSystemGreen: rgb(48, 209, 88);
+	--textColor: white;
+}
+
+#nav-bar {
+	background-color: var(--systemGray);
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#title {
+	margin: 10px;
+}
+
+#toolbar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 90%;
+	margin-bottom: 20px;
+}
