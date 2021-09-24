@@ -1,6 +1,6 @@
 {
 	"name": "sorting-algorithm-visualizer",
-	"homepage": "https://iamroshanpoudel.github.io/sorting-algorithms-visualizer",
+	"homepage": "https://iamroshanpoudel.github.io/sortingAlgorithmsVizualizer",
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
