@@ -1,7 +1,10 @@
-import { React, useEffect, useState } from "react";
+import { React } from "react";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
+import ToggleButton from "@material-ui/core/ToggleButton";
+import ToggleButtonGroup from "@material-ui/core/ToggleButtonGroup";
+import { makeStyles } from "@material-ui/styles";
 
 import "./Navbar.css";
 
@@ -18,8 +21,28 @@ const Navbar = (props) => {
 
 	// lets the user change size of array and speed of sorting
 	const handleArraySizeAndSpeedChange = (event, newValue) => {
-		props.setValue(newValue);
+		props.handleArraySizeAndSpeedChange(newValue);
 	};
+
+	// handle changing of algorithm
+	const handleSortingAlgorithmChange = (event, newValue) => {
+		props.setAlgorithm(newValue);
+	};
+
+	// custom CSS for MUI buttons
+	const useStyles = makeStyles({
+		button: {
+			backgroundColor: "green",
+			color: "#green",
+			"&:hover": {
+				color: "red",
+			},
+			"&:click": {
+				color: "blue",
+			},
+		},
+	});
+	const classes = useStyles();
 
 	return (
 		<div id="nav-bar">
@@ -28,29 +51,45 @@ const Navbar = (props) => {
 			</div>
 			<div id="toolbar">
 				<div>
-					<Typography id="non-linear-slider" gutterBottom>
-						Array size & sorting speed
-					</Typography>
+					<Typography gutterBottom>Array size & sorting speed</Typography>
 					<Slider
-						value={50}
+						value={props.arraySize}
 						min={5}
 						step={5}
 						max={100}
-						// getAriaValueText={valueLabelFormat}
-						// valueLabelFormat={valueLabelFormat}
-						// onChange={}
+						onChange={handleArraySizeAndSpeedChange}
 						valueLabelDisplay="auto"
 						aria-labelledby="array size and sorting speed slider"
+						id="non-linear-slider"
 					/>
 				</div>
-				<Button variant="contained" onClick={generateNewArrayHandler}>
+				{/* <Divider orientation="vertical" variant="fullWidth" light="True" /> */}
+				<div className="separator" />
+
+				<Button variant="text" color="info" onClick={generateNewArrayHandler}>
 					Generate New Array
 				</Button>
-				<Button
-					variant="contained"
-					color="secondary"
-					onClick={sortArrayHandler}
+
+				<div className="separator" />
+				<ToggleButtonGroup
+					value={props.algorithm}
+					exclusive
+					onChange={handleSortingAlgorithmChange}
+					aria-label="sorting algorithm"
 				>
+					<ToggleButton value="Insertion Sort" aria-label="Insertion Sort">
+						Insertion Sort
+					</ToggleButton>
+					<ToggleButton value="Merge Sort" aria-label="Merge Sort">
+						Merge Sort
+					</ToggleButton>
+					<ToggleButton value="Quick Sort" aria-label="Quick Sort">
+						Quick Sort
+					</ToggleButton>
+				</ToggleButtonGroup>
+				<div className="separator" />
+
+				<Button variant="text" color="secondary" onClick={sortArrayHandler}>
 					Sort!
 				</Button>
 			</div>

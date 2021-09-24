@@ -3,14 +3,14 @@ import Colors from "../colors/Colors";
 
 const Bar = (props) => {
 	const barStyle = {
-		height: `${props.length * 0.75}vh`,
+		height: `${props.length * 0.7}vh`,
 		backgroundColor: Colors[props.color],
 		width: `${props.width}px`,
 	};
 	return (
 		<>
 			<div className="bar" style={barStyle}>
-				{props.width > 10 ? props.length : ""}
+				{props.width >= 25 ? props.length : ""}
 			</div>
 		</>
 	);

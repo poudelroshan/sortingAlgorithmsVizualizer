@@ -1,18 +1,18 @@
 import "./App.css";
 import Bar from "./components/bar/Bar";
 import Navbar from "./components/nav/Navbar";
+import Footer from "./components/footer/Footer";
 import { useState, useEffect } from "react";
 import InsertionSort from "./algorithms/InsertionSort";
-
+import MergeSort from "./algorithms/MergeSort/MergeSort";
 const App = () => {
 	// States
 	const [array, setArray] = useState([]);
 	const [arraySteps, setArraySteps] = useState([]);
-	const [colorKey, setColorKey] = useState([]);
 	const [colorSteps, setColorSteps] = useState([]);
-	const [arraySize, setArraySize] = useState(100);
+	const [arraySize, setArraySize] = useState(50);
 	const [currentStep, setCurrentStep] = useState(0);
-	const [delay, setDelay] = useState(1);
+	const [delay, setDelay] = useState(50);
 	const [algorithm, setAlgorithm] = useState("Insertion Sort");
 	const [timeouts, setTimeouts] = useState([]);
 	const [startGeneratingSteps, setStartGeneratingSteps] = useState(false);
@@ -21,8 +21,6 @@ const App = () => {
 	const generateRandomArray = () => {
 		let randomArray = [];
 		for (let i = 0; i < arraySize; i++) {
-			// let num = Math.floor(Math.random() * 100);
-
 			randomArray.push(Math.floor(Math.random() * 100) + 10);
 		}
 		return randomArray;
@@ -32,14 +30,12 @@ const App = () => {
 	// TODO: Refactor this
 	const clearKey = () => {
 		let blankKey = new Array(arraySize).fill(0);
-		setColorKey(blankKey);
 		setColorSteps([blankKey]);
 	};
 
 	// generates steps
 	// TODO: Refactor this
 	const generateSteps = () => {
-		console.log("Generating steps...");
 		let arr = [...array];
 		let steps = [...arraySteps];
 		let clrSteps = [...colorSteps];
@@ -49,6 +45,12 @@ const App = () => {
 		setStartGeneratingSteps(false); // after generating steps, set it to false
 	};
 
+	// returns the sorting algorithm delay speed using formula
+	// formula: speed = 500/arraySize
+	const getDelay = (arraySize) => {
+		return Math.floor(500 / arraySize);
+	};
+
 	// Initializes the app by generating random array
 	const initialize = () => {
 		console.log("Initializing...");
@@ -56,9 +58,17 @@ const App = () => {
 		setArray(newArray);
 		setArraySteps([newArray]);
 		setCurrentStep(0);
+		setDelay(getDelay(arraySize));
 		clearKey();
 		clearTimeouts();
 		setStartGeneratingSteps(true); //invoke start generating steps
+	};
+
+	// change size of random array and corresponding sorting speed
+	const handleArraySizeAndSpeedChange = (newArraySize) => {
+		const newDelay = getDelay(newArraySize);
+		setArraySize(newArraySize);
+		setDelay(newDelay);
 	};
 
 	// clear timeouts
@@ -75,7 +85,7 @@ const App = () => {
 		if (currentStep == arraySteps.length - 1) {
 			return false;
 		}
-
+		console.log(delay);
 		for (let i = 0; i < arraySteps.length; i++) {
 			let timeout = setTimeout(() => {
 				setArray([...arraySteps[i]]);
@@ -86,6 +96,12 @@ const App = () => {
 		setTimeouts(timeoutsArray);
 	};
 
+	// returns the bar width according to the arraysize
+	// formula: width = 750/arraySize
+	const getBarWidth = () => {
+		return Math.floor(500 / arraySize);
+	};
+
 	// bars jsx object
 	const bars = array.map((number, index) => {
 		return (
@@ -93,7 +109,7 @@ const App = () => {
 				key={index}
 				index={index}
 				length={number}
-				width={5}
+				width={getBarWidth()}
 				color={colorSteps[currentStep][index]}
 			/>
 		);
@@ -109,7 +125,7 @@ const App = () => {
 	// When the document loads, initialize with new array
 	useEffect(() => {
 		initialize();
-	}, []);
+	}, [arraySize]);
 
 	// when the array is done initializing, generate steps
 	useEffect(() => {
@@ -124,11 +140,13 @@ const App = () => {
 				startSorting={startSorting}
 				currentStep={currentStep}
 				generateNewArray={initialize}
+				handleArraySizeAndSpeedChange={handleArraySizeAndSpeedChange}
+				arraySize={arraySize}
+				algorithm={algorithm}
+				setAlgorithm={setAlgorithm}
 			/>
 			<div className="array-display">{bars}</div>
-
-			{/* <button onClick={initialize}>Generate new array</button>
-			<button onClick={pause}> Pause</button> */}
+			<Footer />
 		</div>
 	);
 };
