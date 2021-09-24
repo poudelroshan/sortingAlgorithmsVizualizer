@@ -8,7 +8,7 @@ const Footer = (props) => {
 		<div id="footer">
 			<div>
 				Please note that this project is still under construction. The
-				implementation of Merge and Quick Sort has not been completed yet.
+				implementation of Merge and Quick Sort have not been completed yet.
 			</div>
 			<div>
 				Made with <FavoriteIcon color="warning" /> by

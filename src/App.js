@@ -48,7 +48,7 @@ const App = () => {
 	// returns the sorting algorithm delay speed using formula
 	// formula: speed = 500/arraySize
 	const getDelay = (arraySize) => {
-		return Math.floor(500 / arraySize);
+		return Math.floor(1000 / arraySize);
 	};
 
 	// Initializes the app by generating random array
