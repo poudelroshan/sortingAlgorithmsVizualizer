@@ -3,7 +3,7 @@ import Colors from "../colors/Colors";
 
 const Bar = (props) => {
 	const barStyle = {
-		height: `${props.length * 0.7}vh`,
+		height: `${props.length * 0.65}vh`,
 		backgroundColor: Colors[props.color],
 		width: `${props.width}px`,
 	};
