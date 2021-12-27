@@ -23,6 +23,8 @@ const App = () => {
 		for (let i = 0; i < arraySize; i++) {
 			randomArray.push(Math.floor(Math.random() * 100) + 10);
 		}
+		// TODO: Remove next line after testing purposes
+		// randomArray = [42, 35, 28, 20, 37, 30, 101, 25, 49, 13];
 		return randomArray;
 	};
 
@@ -39,7 +41,7 @@ const App = () => {
 		let arr = [...array];
 		let steps = [...arraySteps];
 		let clrSteps = [...colorSteps];
-		InsertionSort(arr, steps, clrSteps);
+		MergeSort(arr, steps, clrSteps);
 		setArraySteps(steps);
 		setColorSteps(clrSteps);
 		setStartGeneratingSteps(false); // after generating steps, set it to false

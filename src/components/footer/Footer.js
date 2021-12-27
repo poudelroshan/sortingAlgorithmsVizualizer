@@ -7,13 +7,9 @@ const Footer = (props) => {
 	return (
 		<div id="footer">
 			<div>
-				Please note that this project is still under construction. The
-				implementation of Merge and Quick Sort have not been completed yet.
-			</div>
-			<div>
-				Made with <FavoriteIcon color="warning" /> by
-				<a href="https://iamroshanpoudel.com"> Roshan</a> using React.js and
-				Material UI
+				Made with <FavoriteIcon color="warning" /> by{" "}
+				<a href="https://iamroshanpoudel.com">Roshan Poudel</a> using React.js,
+				Material UI, and Github Pages
 			</div>
 		</div>
 	);

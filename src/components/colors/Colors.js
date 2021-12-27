@@ -6,9 +6,11 @@ const colorMap = {
 	darkSystemGreen: "rgb(48, 209, 88)",
 	textColor: "white",
 	sortedGreen: "rgb(48, 209, 88)",
-	purple: "purple",
+	purple: "#5e35b1",
+	pink: "#d81b60",
 	red: "red",
 	yellow: "yellow",
+	orange: "#f44336",
 };
 
 const Colors = {
@@ -17,6 +19,8 @@ const Colors = {
 	2: colorMap["purple"],
 	3: colorMap["red"],
 	4: colorMap["sortedGreen"],
+	5: colorMap["pink"],
+	6: colorMap["orange"],
 };
 
 export default Colors;
