@@ -3,8 +3,10 @@ import Bar from "./components/bar/Bar";
 import Navbar from "./components/nav/Navbar";
 import Footer from "./components/footer/Footer";
 import { useState, useEffect } from "react";
-import InsertionSort from "./algorithms/InsertionSort";
+import InsertionSort from "./algorithms/InsertionSort/InsertionSort";
 import MergeSort from "./algorithms/MergeSort/MergeSort";
+import QuickSort from "./algorithms/QuickSort/QuickSort";
+
 const App = () => {
 	// States
 	const [array, setArray] = useState([]);
@@ -13,7 +15,7 @@ const App = () => {
 	const [arraySize, setArraySize] = useState(50);
 	const [currentStep, setCurrentStep] = useState(0);
 	const [delay, setDelay] = useState(50);
-	const [algorithm, setAlgorithm] = useState("Insertion Sort");
+	const [algorithm, setAlgorithm] = useState("Merge Sort");
 	const [timeouts, setTimeouts] = useState([]);
 	const [startGeneratingSteps, setStartGeneratingSteps] = useState(false);
 
@@ -23,8 +25,6 @@ const App = () => {
 		for (let i = 0; i < arraySize; i++) {
 			randomArray.push(Math.floor(Math.random() * 100) + 10);
 		}
-		// TODO: Remove next line after testing purposes
-		// randomArray = [42, 35, 28, 20, 37, 30, 101, 25, 49, 13];
 		return randomArray;
 	};
 
@@ -41,7 +41,7 @@ const App = () => {
 		let arr = [...array];
 		let steps = [...arraySteps];
 		let clrSteps = [...colorSteps];
-		MergeSort(arr, steps, clrSteps);
+		QuickSort(arr, steps, clrSteps);
 		setArraySteps(steps);
 		setColorSteps(clrSteps);
 		setStartGeneratingSteps(false); // after generating steps, set it to false

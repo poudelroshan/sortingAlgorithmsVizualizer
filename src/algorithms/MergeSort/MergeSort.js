@@ -16,9 +16,6 @@ const MergeSort = (array, arraySteps, colorSteps) => {
 	globalArraySteps = arraySteps;
 	globalColorSteps = colorSteps;
 	mergeSortHelper(0, array.length - 1);
-	console.log("After sort");
-	console.log(colorSteps);
-	console.log(array);
 };
 
 const mergeSortHelper = (startIndex, endIndex) => {
@@ -81,7 +78,7 @@ const merge = (
 		globalColorSteps.push(colorKey.slice());
 		globalArraySteps.push(globalArray.slice());
 	}
-	// At the end, add green color to the merged array
+	// At the end, add green color to signify a sorted merged array
 	colorKey.fill(GREEN, leftArrayStartIndex, rightArrayEndIndex + 1);
 	globalColorSteps.push(colorKey.slice());
 	globalArraySteps.push(globalArray.slice());

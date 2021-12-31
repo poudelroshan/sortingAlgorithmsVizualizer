@@ -2,6 +2,7 @@ const BLUE = 0,
 	YELLOW = 1,
 	PURPLE = 2,
 	RED = 3,
+	PINK = 5,
 	GREEN = 4;
 
 const InsertionSort = (array, arraySteps, colorSteps) => {
@@ -20,8 +21,8 @@ const InsertionSort = (array, arraySteps, colorSteps) => {
 		}
 		// swap items
 		arraySteps.push(array.slice()); // before swap
-		colorKey[i] = RED;
-		colorKey[min_idx] = RED;
+		colorKey[i] = PINK;
+		colorKey[min_idx] = PINK;
 		colorSteps.push(colorKey.slice());
 
 		const temp = array[min_idx];

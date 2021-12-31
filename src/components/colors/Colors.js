@@ -11,6 +11,7 @@ const colorMap = {
 	red: "red",
 	yellow: "yellow",
 	orange: "#f44336",
+	teal: "#64ffda",
 };
 
 const Colors = {
@@ -21,6 +22,7 @@ const Colors = {
 	4: colorMap["sortedGreen"],
 	5: colorMap["pink"],
 	6: colorMap["orange"],
+	7: colorMap["teal"],
 };
 
 export default Colors;
