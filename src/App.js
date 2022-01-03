@@ -38,15 +38,35 @@ const App = () => {
 	// generates steps
 	// TODO: Refactor this
 	const generateSteps = () => {
+		console.log(`generating steps`);
 		let arr = [...array];
-		let steps = [...arraySteps];
+		let steps = [array.slice()];
 		let clrSteps = [...colorSteps];
-		QuickSort(arr, steps, clrSteps);
+		sort(arr, steps, clrSteps);
 		setArraySteps(steps);
 		setColorSteps(clrSteps);
 		setStartGeneratingSteps(false); // after generating steps, set it to false
 	};
 
+	// calls the appropriate algorithm to set the sorting steps
+	const sort = (array, arraySteps, colorSteps) => {
+		// console.log(`sorting Algorithm: ${algorithm}`);
+		// console.log(`arraysteps: ${arraySteps}`);
+		// console.log(`colorSteps: ${colorSteps}`);
+		switch (algorithm) {
+			case "Merge Sort":
+				MergeSort(array, arraySteps, colorSteps);
+				break;
+			case "Quick Sort":
+				QuickSort(array, arraySteps, colorSteps);
+				break;
+			case "Insertion Sort":
+				InsertionSort(array, arraySteps, colorSteps);
+				break;
+			default:
+				console.error("Invalid algorithm selected!");
+		}
+	};
 	// returns the sorting algorithm delay speed using formula
 	// formula: speed = 500/arraySize
 	const getDelay = (arraySize) => {
@@ -55,7 +75,6 @@ const App = () => {
 
 	// Initializes the app by generating random array
 	const initialize = () => {
-		console.log("Initializing...");
 		const newArray = generateRandomArray();
 		setArray(newArray);
 		setArraySteps([newArray]);
@@ -64,6 +83,24 @@ const App = () => {
 		clearKey();
 		clearTimeouts();
 		setStartGeneratingSteps(true); //invoke start generating steps
+	};
+
+	const initialize_with_current_array = () => {
+		const arrayCopy = array.slice();
+		setArraySteps([arrayCopy]);
+		setCurrentStep(0);
+		setDelay(getDelay(arraySize));
+		clearKey();
+		clearTimeouts();
+		setStartGeneratingSteps(true); //invoke start generating steps
+
+		//console.log(`inside initialize with current array: ${array}`);
+		// setArraySteps([array]);
+		// setCurrentStep(0);
+		// setDelay(getDelay(arraySize));
+		// clearKey();
+		// clearTimeouts();
+		// generateSteps();
 	};
 
 	// change size of random array and corresponding sorting speed
@@ -77,6 +114,7 @@ const App = () => {
 	const clearTimeouts = () => {
 		timeouts.forEach((timeout) => clearTimeout(timeout));
 		setTimeouts([]);
+		console.log(`Timeouts cleared...`);
 	};
 
 	// start playing sort animation
@@ -87,7 +125,6 @@ const App = () => {
 		if (currentStep == arraySteps.length - 1) {
 			return false;
 		}
-		console.log(delay);
 		for (let i = 0; i < arraySteps.length; i++) {
 			let timeout = setTimeout(() => {
 				setArray([...arraySteps[i]]);
@@ -95,6 +132,7 @@ const App = () => {
 			}, delay * (i + 1));
 			timeoutsArray.push(timeout);
 		}
+		console.log(`setting tiemeoutout`);
 		setTimeouts(timeoutsArray);
 	};
 
@@ -136,6 +174,11 @@ const App = () => {
 		}
 	}, [startGeneratingSteps]);
 
+	// when the algorithm changes, start generating steps again
+	useEffect(() => {
+		initialize_with_current_array();
+	}, [algorithm]);
+
 	return (
 		<div className="App">
 			<Navbar
@@ -146,6 +189,7 @@ const App = () => {
 				arraySize={arraySize}
 				algorithm={algorithm}
 				setAlgorithm={setAlgorithm}
+				setStartGeneratingSteps={setStartGeneratingSteps}
 			/>
 			<div className="array-display">{bars}</div>
 			<Footer />

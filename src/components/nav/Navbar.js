@@ -26,6 +26,7 @@ const Navbar = (props) => {
 
 	// handle changing of algorithm
 	const handleSortingAlgorithmChange = (event, newValue) => {
+		console.log(`sorting algorithm changed to: ${newValue}`);
 		props.setAlgorithm(newValue);
 	};
 
@@ -74,7 +75,7 @@ const Navbar = (props) => {
 				<ToggleButtonGroup
 					value={props.algorithm}
 					exclusive
-					// onChange={handleSortingAlgorithmChange}
+					onChange={handleSortingAlgorithmChange}
 					aria-label="sorting algorithm"
 				>
 					<ToggleButton value="Insertion Sort" aria-label="Insertion Sort">
